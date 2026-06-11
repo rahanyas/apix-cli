@@ -1,0 +1,19 @@
+{
+  "name": "apix-cli",
+  "version": "1.0.0",
+  "description": "A termianl HTTP client - save, run, and inspect API requests",
+  "main": "bin/apix.js",
+  "bin": {
+    "apix" : "./bin/apix.js"
+  },
+  "keywords": ["cli", "api", "http", "rest", "terminal"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^15.0.0",
+    "conf": "^15.1.0",
+    "ora": "^9.4.0"
+  }
+}
