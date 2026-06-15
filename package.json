@@ -6,6 +6,9 @@
   "bin": {
     "apix" : "./bin/apix.js"
   },
+  "scripts": {
+    "apix" : "node bin/apix.js"
+  },
   "keywords": ["cli", "api", "http", "rest", "terminal"],
   "author": "",
   "license": "ISC",

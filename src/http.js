@@ -11,32 +11,28 @@ export function parseHeaders(headerArgs = []){
 };
 
 export async function makeRequest({method, url, headers = {}, data = null}){
-    const config = {
-        method : method.toLowerCase(),
-        url,
-        headers,
-        validateStatus : () => true
+    const options = {
+        method : method.toUpperCase(),
+        headers : {...headers}
     };
 
     if(data){
-        config.data = typeof data === 'string' ? JSON.parse(data) : data;
-        config.headers['Content-Type'] = 'application/json'
+        options.body = typeof data === 'string' ? JSON.stringify(data) : data;
+        options.headers['Content-Type'] = 'application/json'
     }
 
     const start = Date.now();
-    const promise = await fetch(config);
-    console.log('promise : ', promise)
-    const response = await promise.json();
-    console.log('response : ', response)
+    const response = await fetch(url, options);
     const duration = Date.now() - start;
 
-    console.log('response.data : ', response.data)
+    const contentType = response.headers.get('content-type') || '';
+    const body = contentType.includes('application/json') ? await response.json() : await response.text()
 
     return {
         status : response.status,
         statusText : response.statusText,
         headers : response.headers,
-        data : response.data,
+        data : body,
         duration
     };
 }
